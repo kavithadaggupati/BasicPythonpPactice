@@ -1,0 +1,104 @@
+#Contact Book App Features:
+#1.Add Contact (Name, Phone,Email)
+#2. view all contacts
+#3.update contact
+#4. delete contact
+#5. search contact
+#6. count total contacts
+#7. exit contacts
+#dictionary format:
+#contacts = { "Name":{"phone" : "12344567890","email":"name@gmail.com"},
+#             "Name2": {"phone": "76578906535", "email":"kavi@gmail.com"}}
+
+
+contacts = {}
+
+def addContact():
+    name = input("Enter name:").strip()
+    if name in contacts:
+        print("Contact already exists!")
+    else:
+        phone = input("Enter Phone number: ").strip()
+        email = input("Enter Email:").strip()
+        contacts[name] = {"phone": phone, "email": email}
+        print("Contact added successfully.")
+
+def viewContact():
+    if contacts:
+        print("....Contact List...")
+        for name,info in contacts.items():
+            print(f"Name: {name}, phone: {info["phone"]},email: {info["email"]}")
+    else:
+        print("No contacts found.")
+
+def updateContact():
+    name = input("Enter name to update: ").strip()
+    if name in contacts:
+        print("leave blank to keep old value")
+        phone = input(f"New phone:({contacts[name]['phone']}): ").strip()
+        email = input(f"New email: ({contacts[name]["email"]}): ").strip()
+
+        if phone:
+            contacts[name]["phone"] = phone
+        if email:
+            contacts[name]["email"] = email
+        print("Contact updated successfully.")
+    else:
+        print("No contacts found.")
+
+
+def deleteContact():
+    name = input("Enter name to delete:").strip()
+    if name in contacts:
+        del contacts[name]
+        print("Contact Deleted Successfully.")
+    else:
+        print("No contact found.")
+
+def searchContact():
+    name = input("Enter the name to search:").strip()
+    if name in contacts:
+        print(f" Name: {contacts[name]}, Phone: {contacts[name]["phone"]}, Email: {contacts[name]["email"]}")
+    else:
+        print("No contacts Found.")
+def countContact():
+    print(f"Total contacts count: {len(contacts)}")
+
+
+
+def menu():
+    while True:
+        print("....Contact Book App....")
+        print("1. Add Contact")
+        print("2. View Contact")
+        print("3. Update Contact")
+        print("4. Delete Contact")
+        print("5. Search Contact")
+        print("6. Count Contact")
+        print("7. Exit.")
+
+        choice = input("Enter your choice (1 - 7): ").strip()
+
+        if choice == "1":
+            addContact()
+        elif choice == "2":
+            viewContact()
+        elif choice == "3":
+            updateContact()
+        elif choice =="4":
+            deleteContact()
+        elif choice == "5":
+            searchContact()
+        elif choice == "6":
+            countContact()
+        elif choice == "7":
+            print("exiting Contact Book > Good Bye.")
+            break
+        else:
+            print("Invalid choice.")
+
+
+menu()
+
+        
+      

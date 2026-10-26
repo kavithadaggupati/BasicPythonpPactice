@@ -1,0 +1,37 @@
+#CALSIFY CALCULATOR APP
+
+
+#Features of Calcify:-
+#1. can do + - * / operations
+#Accepts full expressions (ex: 1+2-3*4)
+#shows error for division by zero
+#allows only numbers and operators
+#runs untill user tupes 'exit'
+
+def Calcify():
+
+    print("...Welcome to Calcify...Calculator App...")
+    print("Supports: Addition(+), Substraction(-), Multiplication(*), Division(/)")
+    print("Type 'exit' to quit")
+
+    while True:
+        expression = input("enter the expression:")
+        if expression.lower() == "exit":
+            print("exiting Calcify")
+            break
+        try:
+            allowed = "0123456789-+*/.()"
+            if all(char in allowed for char in expression):
+                result = eval(expression)
+                print(f'Result: {result}')
+            else:
+                print("invalid chars")
+        except ZeroDivisionError:
+            print("Error: Division by Zero")
+        except Exception as e:
+            print("Error: Invalid Expression.")
+
+
+
+ 
+Calcify()

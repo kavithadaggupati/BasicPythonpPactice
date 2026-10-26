@@ -1,0 +1,87 @@
+#PyBank  - SIMPLE BANKING APP
+
+#Features:
+#1. Deposit money (supports decimal amounts)
+#2. Withdraw money  (cannot exceed available balance)
+#3. check current balance
+# 4. view transaction history
+#5. show total deposits and withdrawls
+#6. menu based navigation with confirmation messages
+#7. exit option to close the program
+
+
+
+balance = 0.0
+
+transactions = []
+
+def deposit(amount):
+    global balance
+    balance += amount
+    transactions.append(f'Deposited {amount}/-')
+    print(f'{amount} deposited successfully\n')
+
+
+def withdraw(amount):
+    global balance
+    if amount > balance:
+        print("Insufficient balance")
+    else:
+        balance -= amount
+        transactions.append(f'withdrawn{amount}/-')
+        print(f'{amount} withdrawn successfully\n')
+
+def checkBalance():
+    print(f'Current Balance: {balance}/-')
+
+def  transactionHistory():
+    if not transactions:
+        print("No transactions yet.\n")
+    else:
+        print(".....transaction history...")
+
+        for t in transactions:
+            print("-",t)
+        deposits = sum(1 for t in transactions if 'Deposited' in t)
+        withdrawls = sum(1 for t in transactions if 'withdrawn' in t)
+        print(f'\n total deposits: {deposits}')
+        print(f'\n total withdrawls : {withdrawls}')
+
+
+
+
+
+def menu():
+
+    while True:
+
+        print("....PyBankMenu.....")
+        print("1.Deposit")
+        print("2.withdraw")
+        print("3.check balance")
+        print("4.view transaction history")
+        print("5.exit")
+        choice = input("enter your choice:")
+
+        if choice == '1':
+            amount = float(input("enter your amount to deposit:"))
+            deposit(amount)
+
+        elif choice == '2':
+            amount = float(input("Enter your amountt to withdraw:"))
+            withdraw(amount)
+
+        elif choice == '3':
+            checkBalance()
+
+        elif choice == '4':
+            transactionHistory()
+
+        elif choice == '5':
+            print("Thank you for using PyBank. Good Bye.")
+            break
+
+        else:
+            print("invalid choice.")
+
+menu()

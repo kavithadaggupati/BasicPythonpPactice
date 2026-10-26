@@ -1,0 +1,72 @@
+#PyChat - Simple Chat App
+#User can Register and send messages to each other
+#ex: 
+#register : alice , bob
+#Messages : Alice -> bob : "hello"
+#Chat history:
+#Alice -> bob : hello
+
+
+users = []
+chat_history = []
+
+def show_menu():
+    print("....PyChat - Simple Chat App...")
+    print("1. Register User")
+    print("2. Send Messages")
+    print("3. Show chat_History")
+    print("4. Exit")
+
+def register_User():
+    global users
+    name = input("Enter your name:")
+    if name in users:
+        print("user already registered.")
+    else:
+        users.append(name)
+        print(f"{name} successfully registered.")
+
+def send_Messages():
+    global users
+    global chat_histoty
+
+    sender = input("Enter your Name:")
+    if sender not in users:
+        print("Not registered.")
+        return
+    receiver = input("Enter receiver Name:")
+    if receiver not in users:
+        print("Receiver not Registered.")
+        return
+    message  = input("Enter your message:")
+    chat = f'{sender} -> {receiver} : {message}'
+    chat_history.append(chat)
+    print("Message sent.")
+
+def show_chat_history():
+    global chat_history
+    print("...Chat History....")
+    if not chat_history:
+        print("No message yet.")
+    else:
+        for message in chat_history:
+            print(message)
+
+
+def menu():
+    while True:
+        show_menu()
+        choice = input("enter your choice:")
+        if choice == "1":
+            register_User()
+        elif choice == "2":
+            send_Messages()
+        elif choice =="3":
+            show_chat_history()
+        elif choice == "4":
+            print("Exiting PyChat. Good Bye!")
+        else:
+            print("Invalid Choice, Try again!")
+menu()
+
+

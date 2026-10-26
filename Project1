@@ -1,0 +1,34 @@
+# CAFE MANAGEMENT
+# STEP1 : Greeting the User
+# Step2 : Showing Menu { 'Pizza ' : 40, 'Burger' : 70, 'Salad' : 55, 'Pop Corn' : 88}
+# Step3: Note the item
+# Step4 : Checck the item in our menu
+        #  if yes: add the cost
+        #   ask  user for anything else
+        #   if yes: note the second item 
+        #      check the item in our menu
+        #          calculate total cost and display
+        #    if no: end order and display cost
+        # if no : display error message
+menu = { 'pizza' : 50, 'burger' : 50, 'salad': 45, 'pop corn' : 80}
+print('welcome to cafe')
+print('pizza :50\nburger:50\nsalad:45\npopcorn:80')
+order_item = input('enter your item:')
+order_total = 0
+if order_item in menu:
+    order_total += order_total + menu[order_item]
+    order = input("Dou want any thing else (yes/no):")
+    if order == 'yes ':
+        order_item2 = input("enter second item:")
+        
+        if order_item2 in menu:
+            order_total =+ menu[order_item2]
+            print(f'your order value:{order_total}')
+
+
+    print(f'your order_total: {order_total}')
+
+else:
+    print("you entered wrong item.")
+
+

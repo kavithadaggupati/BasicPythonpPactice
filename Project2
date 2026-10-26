@@ -1,0 +1,22 @@
+#Elictricity Bill Generator
+
+# 100 below units -> 5 per unit
+# 200 below units -> 7 per unit
+# 300 below units -> 10 per unit
+# 300 above units -> 15 per unit
+
+
+
+def billGenerator(units):
+    if units <= 100 :
+        bill = units * 5
+    elif units <= 200 :
+        bill = (100*5) + ((units-100) *7)
+    elif units <= 300 :
+        bill = (100*5) + ((100*7) + (units-200)*10)
+    else:
+        bill = (100*5)+ (100*7)+(100*10)+((units-300)*15)
+    return bill
+units = int(input ("Enter your units:"))
+total_bill = billGenerator(units)
+print(f'your total_bill for {units} units  - {total_bill}')

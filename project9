@@ -1,0 +1,113 @@
+#PyMart 
+#PyMart Features:-
+#1. Show Products
+#2. Add to cart with quantity
+#view cart
+#Checkout
+#exit
+
+products = {
+    1: { "name": "Apples","price":50},
+    2: { "name": "Bananas","price":60},
+    3: { "name": "milk","price":30},
+    4: { "name": "bread","price":70}
+}
+
+cart = {}
+
+def show_Products():
+    print("...Available Products...")
+
+    for pid,details in products.items():
+        print(f"{pid}.{details["name"]}-{details["price"]}")
+
+def view_cart():
+    print("....Your Cart...")
+    if not cart:
+        print("cart is empty.")
+    else:
+        total = 0
+        for pid,item in cart.items():
+            name = item["name"]
+            price = item["price"]
+            qty = item["quantity"]
+            sub_total = qty * price
+            total = total + sub_total
+            print(f"{pid} | {name}(x {qty}) - {sub_total}/-")
+            print(f"total: {total}/-")
+
+def add_to_cart():
+    show_Products()
+    try:
+        pid = int(input("Enter Product ID to add:"))
+        if pid in products:
+            qty = int(input("Enter Quantity:"))
+            if pid in cart:
+                cart[pid]['quantity'] += qty
+            else:
+                cart[pid] = { "name":products[pid]["name"], "price": products[pid]["price"],"quantity":qty }
+            print(f"{qty} * { products[pid]["name"]} added to cart.")
+    except ValueError:
+        print("Invalid Input.")
+
+
+def remove_from_cart():
+    view_cart()
+    if not cart:
+        return
+    try:
+        pid = int(input("Enter product id to remove:"))
+        if pid in cart:
+            qty = int(input("Enter Quantity:"))
+            current_qty = cart[pid]["quantity"]
+            if qty == current_qty:
+                del cart[pid]
+            elif qty < current_qty:
+                cart[pid]["quantity"]  -= qty
+            else:
+                print("You only have {current_qty}")
+        else:
+            print("Item not in Cart.")
+    except ValueError:
+        print("Invalid Input.")
+
+def checkout():
+    view_cart()
+    if cart:
+        confirm = input("Proceed to checkout(y/n):")
+        if confirm == "y":
+            print("Thank you for shopping at PyMart.")
+        else:
+            print("Checkout Canceled.")
+
+
+
+def menu():
+    while True:
+        print("....\n PyMart - Mini Shopping Cart....")
+        print("1. View Products")
+        print("2. Add to cart")
+        print("3. Remove from Cart")
+        print("4. Viewcart")
+        print("5. checkout")
+        print("6. Exit")
+
+        choice = input("Enter your choice:")
+
+        if choice == "1":
+            show_Products()
+        elif choice == "2":
+            add_to_cart()
+        elif choice == "3":
+            remove_from_cart()
+        elif choice == "4":
+            view_cart()
+        elif choice =="5":
+            checkout()
+        elif choice =="6":
+            print("Exiting PyMart .Good bye!")
+            break
+        else:
+            print("Invalid Choice !Please try again.")
+
+menu()

@@ -1,0 +1,95 @@
+#....STOCK MARKRT APPLICATION...
+#Add money to wallet
+#Show stocks with prices
+#stock prices changes randomly
+#buy stocks if you have enough money
+#sell stocks if you own them
+#portfolio shows your shares
+#wallet updates after buy or sell
+#quit any time and see final summary
+
+
+import random
+
+wallet = int(input("Enter your money to wallet:"))
+
+stocks = {  "TATA": 50, "SUZLON": 70, "OLA": 50  }
+portfolio = { }
+
+def update_prices():
+    for stock in stocks:
+        change = random.randint(-20,20)
+        new_price = stocks[stock] + change
+        stocks[stock] = max(10, new_price)
+
+ 
+
+while True:
+    print( )
+    print("....STOCK MARKET APPLICATION....")
+    print()
+    
+    for name,price in stocks.items():
+        print(f'{name}- {price}')
+    print(f"wallet: {wallet}")
+    print(f"portfolio : {portfolio if portfolio else 'empty'}")
+
+    choice = input("\nBUY-B : \nSELL-S : \nQUIT-Q : ").lower()
+
+    if choice == 'b':
+        stock = input("Enter stock name:").upper()
+        if stock not in stocks:
+            print("invalid stock")
+            continue
+            
+            
+        qty = int(input("How mant shares:"))
+        cost = stocks[stock] * qty
+
+        if cost > wallet:
+            max_qty = wallet // stocks[stock]
+            print(f"not enough money,you can buy max:{max_qty} shares.")
+            continue
+        else:
+            wallet -= cost
+            portfolio[stock] = portfolio.get(stock,0) + qty
+            print(f'Bought: {qty}{stock} for {cost}')
+
+
+
+    elif choice == 's':
+        stock = input("enter stock name:  ").upper()
+        if stock not in portfolio or portfolio[stock] == 0:
+            print("You dont own any stock.")
+            continue
+        qty = int(input("how many shares:"))
+        if qty > portfolio[stock]:
+            print(f"you only own {portfolio[stock]} shares.")
+        else:
+            earning = stocks[stock] * qty
+            wallet += earning
+            portfolio[stock] -= qty
+            print(f'sold: {qty}{stock} for {earning}')
+
+
+
+
+    elif choice == "q":
+        print("thanks for trading.")
+        print(f"wallet: {wallet}")
+        print(f"portfolio : {portfolio if portfolio else 'empty'}")
+    else:
+        print("invalid choice")
+
+
+    update_prices()
+    
+
+
+
+
+
+
+
+
+    
